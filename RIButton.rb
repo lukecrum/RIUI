@@ -50,9 +50,9 @@ end
 
 button1 = RIButton.new(100, 100, 100, 50, "green", "blue")
 button1.setLabel("1", "SF-PRO-Text-Bold.otf", 25, "white")
-button2 = RIButton.new(100, 200, 100, 50, "purple", "orange")
+button2 = RIButton.new(250, 100, 100, 50, "purple", "orange")
 button2.setLabel("2", "SF-PRO-Text-Bold.otf", 25, "white")
-button3 = RIButton.new(250, 100, 100, 50, "blue", "green")
+button3 = RIButton.new(100, 200, 100, 50, "blue", "green")
 button3.setLabel("3", "SF-PRO-Text-Bold.otf", 25, "white")
 button4 = RIButton.new(250, 200, 100, 50, "orange", "purple")
 button4.setLabel("4", "SF-PRO-Text-Bold.otf", 25, "white")
