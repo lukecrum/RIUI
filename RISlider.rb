@@ -1,11 +1,12 @@
 require 'ruby2d'
 class RISlider
   attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color
+
   @value = 0
   @active = false
   @holding = false
 
-  def initialize(opts = [:length, :x, :y, :square_size, :ticks]) # Initialize all variables and start functionality
+  def initialize(opts = [:length, :x, :y, :square_size, :ticks]) ### Initialize all variables and start functionality
     extend Ruby2D::DSL
     @x = opts[:x] || 0
     @y = opts[:y] || 0
@@ -23,24 +24,24 @@ class RISlider
     start_update
   end
 
-  def setColors(opts = [:square_color, :line_color]) # Sets the colors of the line and square
+  def setColors(opts = [:square_color, :line_color]) ### Sets the colors of the line and square
     @line_color = opts[:line_color]
     @square_color = opts[:square_color]
     @line.color = @line_color
     @square.color = @square_color
   end
 
-  def setLabel(opts = [:size, :font, :color])
+  def setLabel(opts = [:size, :font, :color]) ### Creates a label for the slider
     @label_size = opts[:size]
     @label_font = opts[:font]
     @label_color = opts[:color]
     @label = Text.new(x: @x + @length + 15, y: @y, color: @label_color, font: @label_font, size: @label_size)
   end
-  def value; @value; end # Gets slider's value
+  def value; @value; end ### Returns slider's value
 
   private
 
-  def actions # Defines mouse click actions
+  def actions ### Defines mouse click actions
     extend Ruby2D::DSL
     @down_action = on :mouse_down do |e|
       if @square.contains?(e.x, e.y)
@@ -54,7 +55,7 @@ class RISlider
     end
   end
 
-  def check # Checks and updates the square's position while keeping it in bounds of the line
+  def check ### Checks and updates the square's position while keeping it in bounds of the line
     @max = @x + @length
     @min = @x - @square.size/2
     extend Ruby2D::DSL
@@ -72,11 +73,11 @@ class RISlider
     @value = (@value).ceil - 1
   end
 
-  def update_label # Updates the slider's label
+  def update_label ### Updates the slider's label when the value changes
     @label.text = @value
   end
 
-  def start_update # Starts update function to be run every frame
+  def start_update ### Starts update function to be run every frame
     extend Ruby2D::DSL
     update do
       check
