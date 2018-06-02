@@ -1,76 +1,47 @@
 require 'ruby2d'
 
 class RIButton
-  @@clicked = false
-  def initialize(x, y, width, height, color, hover)
-    extend Ruby2D::DSL
-    set background: 'white'
-    set width: 450
-    set title: 'UI Testing'
-    @rect = Rectangle.new(x: x, y: y, z: 0, width: width, height: height, color: color)
-    @hover_color = hover
-    @normal_color = color
-    @click_event = on :mouse_down do |e|
-      if @rect.contains?(e.x, e.y)
-        @clicked = true
-      else
-        @clicked = false
-      end
-      isClicked
-    end
-    @hover_event = on :mouse_move do |e|
-    if @rect.contains?(e.x, e.y)
-      @rect.color = @hover_color
-    else
-      @rect.color = @normal_color
-    end
+  attr_accessor :x, :y, :width, :height, :color, :hover_color, :text, :font, :size, :font_color
+  def initialize(opts = [:x, :y, :width, :height, :color, :hover_color]) # Initialize variables and start actions
+    @x = opts[:x] || 0
+    @y = opts[:y] || 0
+    @width = opts[:width] || 100
+    @height = opts[:height] || 50
+    @color = opts[:color] || 'blue'
+    @hover_color = opts[:hover_color] || 'green'
+    @rect = Rectangle.new(x: @x, y: @y, z: 0, width: @width, height: @height, color: @color)
+    actions
   end
-  def isClicked
-    if @clicked
-      true
-    else
-      false
-    end
-  end
-  def contains(x, y)
+
+  def contains(x, y) # Check if the button contains a certain point
     if @rect.contains?(x, y)
       true
     else
       false
     end
   end
-  def setLabel(text, font, fontSize, fontColor)
-    @temp_label = Text.new(x: 0, y: 0, text: text, font: font, color: 'white', size: fontSize)
-    @label = Text.new(x: @rect.x + (@rect.width / 2) - (@temp_label.width/2), y: @rect.y + (@rect.height / 2) - (@temp_label.height/2), text: text, font: font, color: fontColor, size: fontSize)
+
+  def setLabel(opts = [:text, :font, :size, :color]) # Sets the label of the button
+    @text = opts[:text]
+    @font = opts[:font]
+    @size = opts[:size]
+    @font_color = opts[:font_color]
+    @temp_label = Text.new(x: 0, y: 0, text: @text, font: @font, color: @font_color, size: @size)
+    @label = Text.new(x: @rect.x + (@rect.width / 2) - (@temp_label.width/2), y: @rect.y + (@rect.height / 2) - (@temp_label.height/2), text: @text, font: @font, color: @font_color, size: @size)
     @temp_label.remove
   end
+
+  private
+
+  def actions # Defines actions
+    extend Ruby2D::DSL
+    @hover_event = on :mouse_move do |e|
+      if @rect.contains?(e.x, e.y)
+        @rect.color = @hover_color
+      else
+        @rect.color = @color
+      end
+    end
+  end
+
 end
-end
-
-
-button1 = RIButton.new(100, 100, 100, 50, "green", "blue")
-button1.setLabel("1", "SF-PRO-Text-Bold.otf", 25, "white")
-button2 = RIButton.new(250, 100, 100, 50, "purple", "orange")
-button2.setLabel("2", "SF-PRO-Text-Bold.otf", 25, "white")
-button3 = RIButton.new(100, 200, 100, 50, "blue", "green")
-button3.setLabel("3", "SF-PRO-Text-Bold.otf", 25, "white")
-button4 = RIButton.new(250, 200, 100, 50, "orange", "purple")
-button4.setLabel("4", "SF-PRO-Text-Bold.otf", 25, "white")
-
-extend Ruby2D::DSL
-on :mouse_down do |e|
-  if button1.contains(e.x, e.y)
-    puts 'click 1'
-  end
-  if button2.contains(e.x, e.y)
-    puts 'click 2'
-  end
-  if button3.contains(e.x, e.y)
-    puts 'click 3'
-  end
-  if button4.contains(e.x, e.y)
-    puts 'click 4'
-  end
-end
-
-show
