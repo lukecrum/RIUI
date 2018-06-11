@@ -1,7 +1,7 @@
 require 'ruby2d'
 
 class RIButton
-  attr_accessor :x, :y, :width, :height, :color, :hover_color, :text, :font, :size, :font_color
+  attr_accessor :x, :y, :width, :height, :color, :hover_color, :text, :font, :size, :font_color, :onclick
   ##
   #x:: X position of the button
   #y:: Y position of the button
@@ -14,15 +14,16 @@ class RIButton
   #size:: Size of the button's label's text
   #font_color:: Color of the button's label's text
   ##
-  def initialize(opts = [:x, :y, :width, :height, :color, :hover_color]) ### Initialize variables and start actions
+  def initialize(opts = [:x, :y, :width, :height, :color, :hover_color, :onclick]) ### Initialize variables and start actions
     @x = opts[:x] || 0
     @y = opts[:y] || 0
     @width = opts[:width] || 100
     @height = opts[:height] || 50
     @color = opts[:color] || 'blue'
-    @hover_color = opts[:hover_color] || 'green'
+    @hover_color = opts[:hover_color] || @color
+    @onclick = opts[:onclick]
     @rect = Rectangle.new(x: @x, y: @y, z: 0, width: @width, height: @height, color: @color)
-    actions
+    #actions
   end
 
   def contains(x, y) ### Check if the button contains a certain point
@@ -42,18 +43,18 @@ class RIButton
     @label = Text.new(x: @rect.x + (@rect.width / 2) - (@temp_label.width/2), y: @rect.y + (@rect.height / 2) - (@temp_label.height/2), text: @text, font: @font, color: @font_color, size: @size)
     @temp_label.remove
   end
-
-  private
-
-  def actions ### Defines actions
-    extend Ruby2D::DSL
-    @hover_event = on :mouse_move do |e|
-      if @rect.contains?(e.x, e.y)
-        @rect.color = @hover_color
-      else
-        @rect.color = @color
-      end
+  def mouse_move_actions(x, y)
+    if @rect.contains?(x, y)
+      @rect.color = @hover_color
+    else
+      @rect.color = @color
     end
   end
-
+  def mouse_down_actions(x, y)
+    if @rect.contains?(x, y)
+      @onclick.call
+    end
+  end
+  def mouse_up_actions; end
+  def update_actions; end
 end

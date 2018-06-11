@@ -1,28 +1,47 @@
-class Actions
+class RIActions
   @initialized = false
-
+  @id = 0
   def initialize
     @initialized = true
+    @objects = [0]
     actions
+  end
+  def add(object)
+    if @objects[0] == 0
+      @objects.pop
+      @objects.push(object)
+    else
+      @objects.push(object)
+    end
   end
 
   def holding; @holding; end
   def active; @active; end
   def initialized; @initialized; end
-  
+
   private
 
   def actions
     extend Ruby2D::DSL
     @down_action = on :mouse_down do |e|
-      if @square.contains?(e.x, e.y)
-        @active = true
-        @holding = true
+      @objects.each do |object|
+        object.mouse_down_actions(e.x, e.y)
       end
     end
     @up_action = on :mouse_up do |e|
-      @holding = false
-      @active = false
+      @objects.each do |object|
+        object.mouse_up_actions
+      end
+    end
+    @hover_action = on :mouse_move do |e|
+      @objects.each do |object|
+        object.mouse_move_actions(e.x, e.y)
+      end
+    end
+    update do
+      @objects.each do |object|
+        object.update_actions
+      end
     end
   end
 end

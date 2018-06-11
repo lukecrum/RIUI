@@ -1,10 +1,10 @@
 require 'ruby2d'
 class RISlider
-  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active
+  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions
 
   @value = 0
 
-  def initialize(opts = [:length, :x, :y, :square_size, :ticks]) ### Initialize all variables and start functionality
+  def initialize(opts = [:length, :x, :y, :square_size, :ticks, :actions]) ### Initialize all variables and start functionality
     extend Ruby2D::DSL
     @x = opts[:x] || 0
     @y = opts[:y] || 0
@@ -16,15 +16,12 @@ class RISlider
     @label_color = opts[:label_color] || 'black'
     @line_color = opts[:line_color] || 'black'
     @square_color = opts[:square_color] || 'red'
-    puts 'variables initialized'
+    @actions = opts[:actions]
     @line = Line.new(x1: @x, y1: @y, x2: @x + @length, y2: y, color: @line_color)
-    self.square = Square.new(size: @square_size, x: x, y: y - (@square_size/2), color: @square_color)
-    puts 'shapes drawn'
+    self.square = Square.new(size: @square_size, x: x - (@square_size/2), y: y - (@square_size/2), color: @square_color)
     setState(active: false)
-    actions
-    puts 'actions started'
+    #@actions.add(self)
   #  start_update
-    puts 'update started'
   end
 
   def setColors(opts = [:square_color, :line_color]) ### Sets the colors of the line and square
@@ -42,14 +39,21 @@ class RISlider
     @label = Text.new(x: @x + @length + 15, y: @y, color: @label_color, font: @label_font, size: @label_size, text: '0')
     puts 'label set'
   end
+  def reset
+    self.square.x = @x - (@square_size/2)
+    @value = 0
+  end
   def value; @value; end ### Returns slider's value
-
-  def mouse_actions
-    if self.square.contains?(e.x, e.y)
+  def active; @active; end
+  def mouse_down_actions(x, y)
+    if self.square.contains?(x, y)
        setState(active: true)
-       puts 'mouse down'
     end
   end
+  def mouse_up_actions
+    setState(active: false)
+  end
+  def mouse_move_actions(x, y); end
   def update_actions
     check
     update_label
@@ -92,6 +96,7 @@ class RISlider
     @value = ((self.square.x.to_f - @min.to_f) / @length.to_f) * @ticks
     @value = (@value).ceil - 1
     if @value < 0; @value = 0; end
+    if @value > @ticks; @value = ticks; end
   end
 
   def update_label ### Updates the slider's label when the value changes
