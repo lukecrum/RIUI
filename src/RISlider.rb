@@ -1,8 +1,6 @@
 require 'ruby2d'
 class RISlider
-  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions
-
-  @value = 0
+  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions, :onChange
 
   def initialize(opts = [:length, :x, :y, :square_size, :ticks, :actions]) ### Initialize all variables and start functionality
     extend Ruby2D::DSL
@@ -17,6 +15,7 @@ class RISlider
     @line_color = opts[:line_color] || 'black'
     @square_color = opts[:square_color] || 'red'
     @actions = opts[:actions]
+    @value = 0
     @line = Line.new(x1: @x, y1: @y, x2: @x + @length, y2: y, color: @line_color)
     self.square = Square.new(size: @square_size, x: x - (@square_size/2), y: y - (@square_size/2), color: @square_color)
     setState(active: false)
@@ -43,6 +42,9 @@ class RISlider
     self.square.x = @x - (@square_size/2)
     @value = 0
   end
+  def onChange(opts = [:onChange])
+    @onChange = opts[:onChange]
+  end
   def value; @value; end ### Returns slider's value
   def active; @active; end
   def mouse_down_actions(x, y)
@@ -57,6 +59,10 @@ class RISlider
   def update_actions
     check
     update_label
+    changed = check_for_change(@old_value, @value)
+    if changed
+      @onChange.call
+    end
   end
   private
 
@@ -80,6 +86,7 @@ class RISlider
   def check ### Checks and updates the square's position while keeping it in bounds of the line
     @max = @x + @length
     @min = @x - self.square.size/2
+    @old_value = @value
     extend Ruby2D::DSL
     if self.active
       puts 'active'
@@ -97,6 +104,14 @@ class RISlider
     @value = (@value).ceil - 1
     if @value < 0; @value = 0; end
     if @value > @ticks; @value = ticks; end
+  end
+
+  def check_for_change(old_value, new_value)
+    if old_value == new_value
+      false
+    else
+      true
+    end
   end
 
   def update_label ### Updates the slider's label when the value changes
