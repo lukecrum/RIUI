@@ -33,7 +33,9 @@ class RIButton
       false
     end
   end
-
+  def onClick(opts = [:onclick])
+    @onclick = opts[:onclick]
+  end
   def setLabel(opts = [:text, :font, :size, :color]) ### Sets the label of the button
     @text = opts[:text]
     @font = opts[:font]

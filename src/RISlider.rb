@@ -1,6 +1,6 @@
 require 'ruby2d'
 class RISlider
-  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions, :onChange
+  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions, :onchange
 
   def initialize(opts = [:length, :x, :y, :square_size, :ticks, :actions]) ### Initialize all variables and start functionality
     extend Ruby2D::DSL
@@ -42,8 +42,8 @@ class RISlider
     self.square.x = @x - (@square_size/2)
     @value = 0
   end
-  def onChange(opts = [:onChange])
-    @onChange = opts[:onChange]
+  def onChange(opts = [:onchange])
+    @onCcange = opts[:onchange]
   end
   def value; @value; end ### Returns slider's value
   def active; @active; end
@@ -61,7 +61,7 @@ class RISlider
     update_label
     changed = check_for_change(@old_value, @value)
     if changed
-      @onChange.call
+      @onchange.call
     end
   end
   private
