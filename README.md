@@ -10,6 +10,7 @@ include 'RIUI'
 ```
 
 **Buttons:**
+
 To create a new button object:
 ```rb
 button = RIButton.new(x: 125, y: 100, width: 150, height: 100, color: "green", hover_color: "blue")
