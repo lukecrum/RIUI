@@ -1,7 +1,23 @@
 # RIUI
+
 A small, simple Ruby user interface framework
 
-# Installation
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'RIUI'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install RIUI
+
 # Usage
 
 First include the gem in your Ruby file.
@@ -78,4 +94,11 @@ end
  slider.onChange(onchange: value_changed)
  ```
  
- 
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/RIUI.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
