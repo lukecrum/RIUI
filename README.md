@@ -2,6 +2,8 @@
 
 A small, simple Ruby user interface framework
 
+**NOTE:** *This project is its very early stages of development. If you experience a bug or have an idea for a new feature, don't hesitate to open an issue*
+
 ## Installation
 
 Add this line to your application's Gemfile:
