@@ -1,6 +1,6 @@
 class RIImage
 
-  attr_accessor :image, :x, :y, :width, :height
+  attr_accessor :image, :x, :y, :width, :height, :color
 
   def initialize(opts={})
     @path = opts[:image] || "/"
@@ -15,6 +15,9 @@ class RIImage
     @height = opts[:height]
     @image.remove
     @image = Image.new(path: @path, x: @x-@width/2, y: @y-@height/2, width: @width, height: @height)
+  end
+  def setColor(opts=[:color])
+    @image.color = opts[:color]
   end
   def width; @width; end
   def height; @height; end

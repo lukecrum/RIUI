@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    RIUI (0.1.0)
+    RIUI (0.1.1)
       ruby2d (~> 0.5.1)
 
 GEM

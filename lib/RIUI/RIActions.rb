@@ -18,7 +18,8 @@ class RIActions
   def holding; @holding; end
   def active; @active; end
   def initialized; @initialized; end
-
+  def objects; @objects; end
+  
   private
 
   def actions
