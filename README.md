@@ -27,7 +27,7 @@ First include the gem in your Ruby file.
 ```rb
 require 'RIUI'
 ```
-**Views**
+**Views:**
 
 To create a new view:
 ```rb
@@ -91,7 +91,7 @@ end
  button.onClick(onclick: onclick)
  ```
  
- **Sliders::**
+ **Sliders:**
  
  To create a new slider object:
  ```rb
@@ -117,6 +117,25 @@ end
  slider.onChange(onchange: value_changed)
  ```
  
+ **Images:**
+ To create an image object:
+ ```rb
+ image = RIImage.new(x: 500, y: 275, image: "tree.png", width: 100, height: 75)
+ ```
+ You can change the color of an image:
+ ```rb
+ image.setColor(color: 'red')
+ ```
+ 
+ **Labels:**
+ To create a label object:
+ ```rb
+ label = RILabel.new(x: 300, y: 125, font: 'SF-PRO-Text-Bold.otf', size: 20, color: 'black', text: 'Hello World!')
+ ```
+ To change the label's text:
+ ```rb
+ label.setText(text: 'Some new text')
+ ```
 
 ## Contributing
 
