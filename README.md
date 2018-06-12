@@ -25,7 +25,27 @@ Or install it yourself as:
 
 First include the gem in your Ruby file.
 ```rb
-include 'RIUI'
+require 'RIUI'
+```
+**Views**
+
+To create a new view:
+```rb
+require 'RIUI'
+class my_class < RIView
+end
+```
+Then, initialize it:
+```rb
+self.initialize(width: 700, height: 450, background_color: 'white', title: 'RIUI')
+```
+Next, show it:
+```rb
+self.show
+```
+To close the view:
+```rb
+self.exit
 ```
 
 **Actions:**
