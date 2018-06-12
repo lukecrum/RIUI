@@ -1,7 +1,4 @@
-require_relative 'RISlider.rb'
-require_relative 'RIButton.rb'
-require_relative 'RIImage.rb'
-require_relative 'RIActions.rb'
+require 'RIUI'
 
 @image = RIImage.new(x: 500, y: 275, image: "tree.png", width: 100, height: 75)
 

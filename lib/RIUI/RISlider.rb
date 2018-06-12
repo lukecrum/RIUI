@@ -43,7 +43,7 @@ class RISlider
     @value = 0
   end
   def onChange(opts = [:onchange])
-    @onCcange = opts[:onchange]
+    @onChange = opts[:onchange]
   end
   def value; @value; end ### Returns slider's value
   def active; @active; end
@@ -61,7 +61,7 @@ class RISlider
     update_label
     changed = check_for_change(@old_value, @value)
     if changed
-      @onchange.call
+      @onChange.call
     end
   end
   private
