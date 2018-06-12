@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/RIUI.svg)](https://badge.fury.io/rb/RIUI)
 # RIUI
 
 A small, simple Ruby user interface framework
