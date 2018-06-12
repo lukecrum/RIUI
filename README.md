@@ -128,7 +128,7 @@ end
  ```
  
  **Labels:**
- To create a label object:
+ **Note:** *At this time, you must include font files as a file in your project.*
  ```rb
  label = RILabel.new(x: 300, y: 125, font: 'SF-PRO-Text-Bold.otf', size: 20, color: 'black', text: 'Hello World!')
  ```
