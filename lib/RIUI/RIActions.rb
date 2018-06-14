@@ -1,6 +1,5 @@
 class RIActions
   @initialized = false
-  @id = 0
   def initialize
     @initialized = true
     @objects = [0]
@@ -19,7 +18,7 @@ class RIActions
   def active; @active; end
   def initialized; @initialized; end
   def objects; @objects; end
-  
+
   private
 
   def actions
