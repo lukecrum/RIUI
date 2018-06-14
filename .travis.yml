@@ -2,7 +2,8 @@ sudo: false
 language: ruby
 rvm:
   - 2.5.0
-before_install: gem install bundler -v 1.16.1
-script:
+before_install:
+  - gem install bundler -v 1.16.1
   - url='https://raw.githubusercontent.com/simple2d/simple2d/master/bin/simple2d.sh'; which curl > /dev/null && cmd='curl -fsSL' || cmd='wget -qO -'; bash <($cmd $url) install
+script:
   - bundle install && rake
