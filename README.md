@@ -25,7 +25,27 @@ Or install it yourself as:
 
 First include the gem in your Ruby file.
 ```rb
-include 'RIUI'
+require 'RIUI'
+```
+**Views:**
+
+To create a new view:
+```rb
+require 'RIUI'
+class my_class < RIView
+end
+```
+Then, initialize it:
+```rb
+self.initialize(width: 700, height: 450, background_color: 'white', title: 'RIUI')
+```
+Next, show it:
+```rb
+self.show
+```
+To close the view:
+```rb
+self.exit
 ```
 
 **Actions:**
@@ -71,7 +91,7 @@ end
  button.onClick(onclick: onclick)
  ```
  
- **Sliders::**
+ **Sliders:**
  
  To create a new slider object:
  ```rb
@@ -97,6 +117,25 @@ end
  slider.onChange(onchange: value_changed)
  ```
  
+ **Images:**
+ To create an image object:
+ ```rb
+ image = RIImage.new(x: 500, y: 275, image: "tree.png", width: 100, height: 75)
+ ```
+ You can change the color of an image:
+ ```rb
+ image.setColor(color: 'red')
+ ```
+ 
+ **Labels:**
+ **Note:** *At this time, you must include font files as a file in your project.*
+ ```rb
+ label = RILabel.new(x: 300, y: 125, font: 'SF-PRO-Text-Bold.otf', size: 20, color: 'black', text: 'Hello World!')
+ ```
+ To change the label's text:
+ ```rb
+ label.setText(text: 'Some new text')
+ ```
 
 ## Contributing
 
