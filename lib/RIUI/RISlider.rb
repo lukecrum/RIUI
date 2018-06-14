@@ -1,8 +1,21 @@
 require 'ruby2d'
 class RISlider
-  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :square, :id, :active, :actions, :onchange
-
-  def initialize(opts = [:length, :x, :y, :square_size, :ticks, :actions]) ### Initialize all variables and start functionality
+  attr_accessor :length, :x, :y, :square_size, :ticks, :line_color, :square_color, :size, :font, :color, :active, :square, :onchange
+  ##
+  # length:: Length of the slider
+  # x:: X position of the slider
+  # y:: Y position of the slider
+  # square_size:: Length/width of the square
+  # ticks:: Number that represents the value when the square is at its maximum position
+  # line_color:: Color of the line
+  # square_color:: Color of the square
+  # size:: Size of the label's text
+  # font:: Path to the font for the label's text
+  # color:: Color of the label's text
+  # active:: Checks whether the slider is active
+  # onchange:: Action to be called when the slider's value changess
+  ##
+  def initialize(opts = [:length, :x, :y, :square_size, :ticks, :actions]) ### Creates a new RISlider object
     extend Ruby2D::DSL
     @x = opts[:x] || 0
     @y = opts[:y] || 0
@@ -19,8 +32,6 @@ class RISlider
     @line = Line.new(x1: @x, y1: @y, x2: @x + @length, y2: y, color: @line_color)
     self.square = Square.new(size: @square_size, x: x - (@square_size/2), y: y - (@square_size/2), color: @square_color)
     setState(active: false)
-    #@actions.add(self)
-  #  start_update
   end
 
   def setColors(opts = [:square_color, :line_color]) ### Sets the colors of the line and square
@@ -36,11 +47,11 @@ class RISlider
     @label_color = opts[:color]
     @label = Text.new(x: @x + @length + 15, y: @y, color: @label_color, font: @label_font, size: @label_size, text: '0')
   end
-  def reset
+  def reset ### Reset's value to 0 and square's position to the beginning
     self.square.x = @x - (@square_size/2)
     @value = 0
   end
-  def onChange(opts = [:onchange])
+  def onChange(opts = [:onchange]) ### Sets the action to be called when the slider's value changes
     @onChange = opts[:onchange]
   end
   def value; @value; end ### Returns slider's value
@@ -62,26 +73,13 @@ class RISlider
       @onChange.call
     end
   end
-  def label; @label; end
-  def line_color; @line_color; end
-  def square_color; @square_color; end
+  def label; @label; end ### Objects of the slider's label
+  def line_color; @line_color; end ### Color of the line
+  def square_color; @square_color; end ### Color of the square
   private
 
   def setState(opts=[:active])
     self.active = opts[:active]
-  end
-  def actions ### Defines mouse click actions
-    extend Ruby2D::DSL
-    @down_action = on :mouse_down do |e|
-      if self.square.contains?(e.x, e.y)
-         setState(active: true)
-         puts 'mouse down'
-      end
-    end
-    @up_action = on :mouse_up do |e|
-      setState(active: false)
-      puts 'mouse up'
-    end
   end
 
   def check ### Checks and updates the square's position while keeping it in bounds of the line
@@ -119,11 +117,4 @@ class RISlider
     @label.text = @value
   end
 
-  def start_update ### Starts update function to be run every frame
-    extend Ruby2D::DSL
-    update do
-      check
-      update_label
-    end
-  end
 end

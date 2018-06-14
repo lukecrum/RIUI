@@ -1,11 +1,9 @@
 class RIActions
-  @initialized = false
-  def initialize
-    @initialized = true
+  def initialize ### Create a new RIActions object
     @objects = [0]
     actions
   end
-  def add(object)
+  def add(object) ### Adds an object to the actions
     if @objects[0] == 0
       @objects.pop
       @objects.push(object)
@@ -14,10 +12,7 @@ class RIActions
     end
   end
 
-  def holding; @holding; end
-  def active; @active; end
-  def initialized; @initialized; end
-  def objects; @objects; end
+  def objects; @objects; end ### Returns the array of objects that were added
 
   private
 

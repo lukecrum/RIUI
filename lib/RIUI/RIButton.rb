@@ -1,7 +1,6 @@
 require 'ruby2d'
 
 class RIButton
-  attr_accessor :x, :y, :width, :height, :color, :hover_color, :text, :font, :size, :font_color, :onclick
   ##
   #x:: X position of the button
   #y:: Y position of the button
@@ -13,8 +12,10 @@ class RIButton
   #font:: Font of the button's label (note: as of now, you must include the font file within your project for this to work)
   #size:: Size of the button's label's text
   #font_color:: Color of the button's label's text
+  #onclick:: Method to be called when button is pressed
   ##
-  def initialize(opts = [:x, :y, :width, :height, :color, :hover_color, :onclick]) ### Initialize variables and start actions
+  attr_accessor :x, :y, :width, :height, :color, :hover_color, :text, :font, :size, :font_color, :onclick
+  def initialize(opts = [:x, :y, :width, :height, :color, :hover_color, :onclick]) ### Creates a new RIButton object
     @x = opts[:x] || 0
     @y = opts[:y] || 0
     @width = opts[:width] || 100
@@ -59,6 +60,6 @@ class RIButton
   end
   def mouse_up_actions; end
   def update_actions; end
-  def label; @label; end
-  def onclick; @onclick; end
+  def label; @label; end ### Objects of the label
+  def onclick; @onclick; end ### Method to be called when the button is pressed
 end
