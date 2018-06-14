@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/RIUI.svg)](https://badge.fury.io/rb/RIUI)
+[![Gem Version](https://badge.fury.io/rb/RIUI.svg)](https://badge.fury.io/rb/RIUI) [![BuildStatus](https://travis-ci.org/lukecrum/RIUI.svg?branch=master)](https://travis-ci.org/lukecrum/RIUI)
 # RIUI
 
 A small, simple Ruby user interface framework
@@ -90,16 +90,16 @@ end
  ```rb
  button.onClick(onclick: onclick)
  ```
- 
+
  **Sliders:**
- 
+
  To create a new slider object:
  ```rb
  slider = RISlider.new(length: 200, square_size: 10, x: 100, y: 250, ticks: 20)
  ```
- 
+
  See docs for descriptions of each attribute
- 
+
  To access the slider's value:
  ```rb
  slider.value #returns the current value of the slider
@@ -116,7 +116,7 @@ end
  value_changed = method(:slider_change)
  slider.onChange(onchange: value_changed)
  ```
- 
+
  **Images:**
  To create an image object:
  ```rb
@@ -126,7 +126,7 @@ end
  ```rb
  image.setColor(color: 'red')
  ```
- 
+
  **Labels:**
  **Note:** *At this time, you must include font files as a file in your project.*
  ```rb
