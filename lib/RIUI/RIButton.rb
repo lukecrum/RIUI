@@ -59,4 +59,6 @@ class RIButton
   end
   def mouse_up_actions; end
   def update_actions; end
+  def label; @label; end
+  def onclick; @onclick; end
 end

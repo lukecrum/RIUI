@@ -1,3 +1,4 @@
+require 'ruby2d'
 class RILabel
   attr_accessor :x, :y, :font, :size, :color, :text
   def initialize(opts = {})
@@ -18,4 +19,5 @@ class RILabel
   def mouse_up_actions; end
   def mouse_down_actions(x, y); end
   def mouse_move_actions(x, y); end
+  def text; @text; end
 end

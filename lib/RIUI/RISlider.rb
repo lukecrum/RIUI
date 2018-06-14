@@ -28,7 +28,6 @@ class RISlider
     @square_color = opts[:square_color]
     @line.color = @line_color
     self.square.color = @square_color
-    puts 'colors set'
   end
 
   def setLabel(opts = [:size, :font, :color]) ### Creates a label for the slider
@@ -36,7 +35,6 @@ class RISlider
     @label_font = opts[:font]
     @label_color = opts[:color]
     @label = Text.new(x: @x + @length + 15, y: @y, color: @label_color, font: @label_font, size: @label_size, text: '0')
-    puts 'label set'
   end
   def reset
     self.square.x = @x - (@square_size/2)
@@ -64,6 +62,9 @@ class RISlider
       @onChange.call
     end
   end
+  def label; @label; end
+  def line_color; @line_color; end
+  def square_color; @square_color; end
   private
 
   def setState(opts=[:active])

@@ -1,3 +1,4 @@
+require 'ruby2d'
 class RIImage
 
   attr_accessor :image, :x, :y, :width, :height, :color
