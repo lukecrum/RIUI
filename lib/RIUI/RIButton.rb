@@ -34,9 +34,6 @@ class RIButton
       false
     end
   end
-  def onClick(opts = [:onclick])
-    @onclick = opts[:onclick]
-  end
   def setLabel(opts = [:text, :font, :size, :color]) ### Sets the label of the button
     @text = opts[:text]
     @font = opts[:font]
@@ -60,6 +57,6 @@ class RIButton
   end
   def mouse_up_actions; end
   def update_actions; end
-  def label; @label; end ### Objects of the label
+  def label; @label; end ### Object of the label
   def onclick; @onclick; end ### Method to be called when the button is pressed
 end

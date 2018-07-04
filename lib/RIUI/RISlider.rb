@@ -51,11 +51,7 @@ class RISlider
     self.square.x = @x - (@square_size/2)
     @value = 0
   end
-  def onChange(opts = [:onchange]) ### Sets the action to be called when the slider's value changes
-    @onChange = opts[:onchange]
-  end
   def value; @value; end ### Returns slider's value
-  def active; @active; end
   def mouse_down_actions(x, y)
     if self.square.contains?(x, y)
        setState(active: true)
@@ -70,7 +66,7 @@ class RISlider
     update_label
     changed = check_for_change(@old_value, @value)
     if changed
-      @onChange.call
+      @onchange.call
     end
   end
   def label; @label; end ### Objects of the slider's label

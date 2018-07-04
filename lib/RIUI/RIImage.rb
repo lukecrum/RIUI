@@ -26,6 +26,6 @@ class RIImage
   def setColor(opts=[:color]) ### Sets the color tint of the image
     @image.color = opts[:color]
   end
-  def width; @width; end ### Width of the image
-  def height; @height; end ### Height of the image
+  #def width; @width; end ### Width of the image
+  #def height; @height; end ### Height of the image
 end
