@@ -43,6 +43,8 @@ Next, show it:
 ```rb
 self.show
 ```
+**NOTE:** *You must initialize/show the view at the END of the class (make it the last 2 lines).*
+
 To close the view:
 ```rb
 self.exit
